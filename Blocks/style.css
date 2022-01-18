@@ -1,0 +1,27 @@
+#mainBox{
+    border: solid red 2px;
+    background:rgba(139, 18, 18, 0.692);
+    width: 500px;
+    height: 500px;
+}
+#t1
+{
+    border: solid yellow 2px;
+    width: 30%;
+    height: 30%;
+    background-color: rgb(40, 97, 40);
+    float:top; 
+    
+}
+
+body{
+    background:black;
+}
+#t2{
+    
+    border: solid 2px yellow;
+    width: 40%;
+    height: 40%;
+
+    
+}

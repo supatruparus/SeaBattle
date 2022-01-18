@@ -1,0 +1,27 @@
+<html>
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css">
+<title>Пример output</title>
+</head>
+<body>
+<style>
+    body{
+        text-align: center;
+
+    }
+</style>
+
+
+<form class = "form1" oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+  <input type="range" id="a" value="50">100 +
+  <input type="number" id="b" value="25"> =
+  <output name="x" for="a b"></output>
+</form>
+<p>Умножение:</p>
+<form oninput = "d.value = e.valueAsNumber * f.valueAsNumber">
+  <input type = "number" id = "e"> *
+  <input type = "number" placeholder = "число"id = "f"> =
+  <output name = "d" for = "e f"> </output>
+</form>
+</body>
+</html>

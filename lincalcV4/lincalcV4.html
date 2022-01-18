@@ -1,0 +1,106 @@
+<html>
+<head>
+  <link href="style.css" rel="stylesheet" type="text/css">
+<title>HTML Calculator</title>
+<meta  charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+ <br>
+ 
+<body>
+<center><form  name="calculator" >
+
+<table>
+    <br>
+    <input type="reset" value="Очистить" onclick=""> 
+    <br><br>
+    Радиус = <input type="text" name="radius" value=""><br></th></tr>
+<input type="number" size="3" name="num" min="1" max="10" value="1"></p>
+<br>Витки = <input  type="textfield"  name="vitki" value=""><br>
+<br> Ширина = <input type="hidden" name="width" value=""><br>
+<input type ="button"style = "min-height: 45"name ="b1" class="click_me" id="id_1" value ="1.5м"
+onClick= "setvalue(1.5)">
+<input style = "min-height: 45"type ="button"class="click_me" id="id_2" value ="2м"
+onClick= "setvalue(2)">
+<input style = "min-height: 45 "type ="button" class="click_me" id="id_3"value ="3м"
+onClick= "setvalue(3)">
+<input style = "min-height: 45"type ="button" class="click_me" id="id_4" value ="3.5м"
+onClick= "setvalue(3.5)">
+<input style = "min-height: 45"type ="button" class="click_me" id="id_5" value ="4м"
+onClick= "setvalue(4)">
+<br><br><br>
+         
+<input type="button" value="Считать" onclick="calculate()"><br>
+
+<br>Площадь = <input type="textfield" name="resultS" value=""><br>
+<br>Длина = <input type="text" name="Length" value=><br>
+</center>
+</table>
+<table>
+  <tr><th>текст заголовка</th><th>текст заголовка</th></tr> <!--ряд с ячейками заголовков-->
+  <tr><td>данные</td><td>данные</td></tr> <!--ряд с ячейками тела таблицы-->
+  </table>
+
+
+
+    <script>
+        function setvalue(width){
+    				 				document.calculator.width.value=width;
+    				
+    				 				
+    				 }
+        function calculate(){
+
+            r = parseFloat(document.calculator.radius.value.replace(/,/, '.'));
+            v = parseFloat(document.calculator.vitki.value.replace(/,/, '.'));
+            w = parseFloat(document.calculator.width.value.replace(/,/, '.'));
+            result = (r+r+23)/100*3.15 / 2 * v * w;
+            document.calculator.resultS.value= parseFloat(result);
+            document.calculator.Length.value= parseFloat(result/w);
+        }
+
+        document.addEventListener("click", function(thenew)
+
+{
+
+  if_id = thenew . target. id;
+
+  the_class = thenew . target.className;
+
+  if(the_class == "click_me")
+
+  {
+
+    if_id = document.getElementById(if_id);
+
+    if(if_id .style . background == "red")
+
+    {
+
+      if_id .style . background = "#efefef";
+
+    }
+
+    else
+
+    {
+
+      var links = document.querySelectorAll(".click_me");
+
+      links.forEach(link => {
+
+        link.setAttribute("style", "background:#efefef");
+
+      })
+
+      if_id .style . background = "red";
+
+    }
+
+  }
+
+});
+    </script>
+</form>
+</body>
+</html>

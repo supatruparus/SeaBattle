@@ -1,0 +1,78 @@
+body {
+    font-size: 15pt;
+    display: grid;
+    justify-items: center;
+}
+button{
+  min-height: 50px;
+  min-width: 200px;
+  border-radius: 15px;
+  
+  }
+  button:active{
+    min-width: 170px;
+    border-radius: 15px;
+    padding-top:5px;
+  }
+#output{
+  text-align: right;
+  margin-top: 5px;
+  background-color: lightgoldenrodyellow;
+  border: black 2px solid;
+  border-radius: 15px;  
+  width: 200px;
+  height: 60px;
+}
+#calc{
+  display:grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4,1fr);
+  
+  background-color: gray;
+  width: 200px;
+  height: 200px;
+  
+  align-items: center;
+  justify-items: center;
+}
+.button{
+  display: flex;
+  justify-content: center;
+  background-color: whitesmoke;
+  
+  border-radius: 15px;
+  height: 90%;
+  width: 90%;
+  align-items: center;
+  }
+  .button-equal{
+    background-color: red;
+    grid-area: 4/4;
+    grid-row: 3/5;
+    display: flex;
+    height: 90%;
+    width: 90%;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .buttonClear{
+    background-color: greenyellow;
+    grid-area: 1/1;
+  }
+  .button-minus{
+    background-color: green;
+    grid-area: 2/4;
+  }
+  .button-plus{
+    grid-area: 1/4;
+    background-color: yellow;
+  }
+  
+#calc div:active{
+  
+  width: 85%;
+  height: 85%;
+  font-size: 0%;
+}
