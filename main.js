@@ -8,6 +8,41 @@ let ships = {
   indexes: [8,15,16,35,44,33,44,45,46,48,98,99]
 }
 
+let myObj = {
+  a: 1,
+  b: 2,
+  c: 3
+}
+
+newProp = {
+  a:12,
+  b:5,
+  d: 35
+}
+
+
+Object.prototype.merge = function(targetObj, newvaluesObject){
+  targetObj.keys = Object.getOwnPropertyNames(targetObj)
+  targetObj.values = ''
+
+  newvaluesObject.keys = Object.getOwnPropertyNames(newvaluesObject)
+  
+  
+  newvaluesObject.keys.forEach(element => {
+    
+    if(targetObj.keys.includes(element)){
+      console.log('ключ ' + element + ' есть в целевом массиве, старое значение =')
+    } else {console.log('ключа ' + element + ' нет в целевом массиве')}
+  });
+    
+  
+  
+
+
+}
+myObj.merge(myObj, newProp)
+
+
 
 
 
@@ -23,32 +58,12 @@ createField()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function createField(){
   let field = document.createElement('div');
-  console.log(this)
   field.classList.add('field');
   field.id = "field"
+
+
   field.style.width = '400px';
   field.style.height = '400px';
   field.style.backgroundColor = 'yellow';
@@ -86,106 +101,108 @@ function createField(){
     
     
   }
-  }
-function createCells(){
-  for (let index = 0; index < (99); index++) {
-     
-      
-      let cell = document.createElement('div')
-      cell.index = index+1
-      cell.classList.add('cell', 'cell_'+(cell.index));
-      cell.style.backgroundColor = 'white'
-      cell.style.border = '1px solid black'
-      cell.addEventListener('click', function(){console.log(field.size)
-        ;    
-            if( ships.indexes.indexOf(this.index) != -1){
-              console.log('попал')
-              sound.bomb[Math.floor(Math.random() * sound.bomb.length)].play()
-              changeColor.call(this)}
-              else console.log('мимо')
-           
-            sound.click.play()})
-      document.getElementById('field').appendChild(cell)
-
+  function createCells(){
+    for (let index = 0; index < (100); index++) {
+       
+        
+        let cell = document.createElement('div')
+        cell.index = index+1
+        cell.classList.add('cell', 'cell_'+(cell.index));
+        cell.style.backgroundColor = 'white'
+        cell.style.border = '1px solid black'
+        cell.addEventListener('click', function(){console.log(field.size)
+          ;    
+              if( ships.indexes.indexOf(this.index) != -1){
+                console.log('попал')
+                sound.bomb[Math.floor(Math.random() * sound.bomb.length)].play()
+                changeColor.call(this)}
+                else console.log('мимо')
+             
+              sound.click.play()})
+        document.getElementById('field').appendChild(cell)
   
-  
-
- 
-  
- 
-  }
-
-
-function changeColor(){
-    this.style.backgroundColor = 'black';
-  }
-
-}
-
-function create_numbers(){
-  let cells = document.getElementById('cells')
-  let numbers = document.createElement('div')
-  numbers.classList.add('numbers')
-
-
-
-  numbers.style.position = 'relative'
-  numbers.style.backgroundColor = 'red'
-  numbers.style.height = '90%'
-  numbers.style.width = '8%'
-  numbers.style.marginTop = '10%'
-  numbers.style.bottom = '0px'
-  numbers.style.float = 'left'
-
-
-  numbers.insertAdjacentElement('beforebegin', field)
-  document.querySelector('.field').insertAdjacentElement("beforebegin", numbers)
-
-}
-function fill(targetElem, qty){
-  const width = getComputedStyle(targetElem).width
-  for (let index = 0; index < qty; index++) {
-    let new_elem = document.createElement('div')
-    new_elem.style.textAlign = "center"
-    new_elem.style.justifyContent = 'bottom'
     
-    switch ((index+1)) {
-      case 1:
-        new_elem.innerText = 'К'
-        break;
-      case 2:
-        new_elem.innerText = 'И'
-        break;
-      case 3:
-        new_elem.innerText = 'З'
-        break;
-      case 4:
-        new_elem.innerText = 'Ж'
-        break;
-      case 5:
-        new_elem.innerText = 'Е'
-        break;
-      case 6:
-        new_elem.innerText = 'Д'
-        break;
-      case 7:
-        new_elem.innerText = 'Г'
-        break;
-      case 8:
-        new_elem.innerText = 'В'
-        break;
-      case 9:
-        new_elem.innerText = 'Б'
-        break;
-      case 10:
-        new_elem.innerText = 'А'
-        break;     
-      default:
-        break;
-    }
-    new_elem.style.border = 'solid 1px green'
-    targetElem.insertAdjacentElement('afterbegin', new_elem)
     
-  }
+  
    
+    
+   
+    }
+  
+  
+  function changeColor(){
+      this.style.backgroundColor = 'black';
+    }
+  
+  }
+  function create_numbers(){
+    let cells = document.getElementById('cells')
+    let numbers = document.createElement('div')
+    numbers.classList.add('numbers')
+  
+  
+  
+    numbers.style.position = 'relative'
+    numbers.style.backgroundColor = 'red'
+    numbers.style.height = '90%'
+    numbers.style.width = '8%'
+    numbers.style.marginTop = '10%'
+    numbers.style.bottom = '0px'
+    numbers.style.float = 'left'
+  
+  
+    numbers.insertAdjacentElement('beforebegin', field)
+    document.querySelector('.field').insertAdjacentElement("beforebegin", numbers)
+  
+  }
+  function fill(targetElem, qty){
+    const width = getComputedStyle(targetElem).width
+    for (let index = 0; index < qty; index++) {
+      let new_elem = document.createElement('div')
+      new_elem.style.textAlign = "center"
+      new_elem.style.justifyContent = 'bottom'
+      
+      switch ((index+1)) {
+        case 1:
+          new_elem.innerText = 'К'
+          break;
+        case 2:
+          new_elem.innerText = 'И'
+          break;
+        case 3:
+          new_elem.innerText = 'З'
+          break;
+        case 4:
+          new_elem.innerText = 'Ж'
+          break;
+        case 5:
+          new_elem.innerText = 'Е'
+          break;
+        case 6:
+          new_elem.innerText = 'Д'
+          break;
+        case 7:
+          new_elem.innerText = 'Г'
+          break;
+        case 8:
+          new_elem.innerText = 'В'
+          break;
+        case 9:
+          new_elem.innerText = 'Б'
+          break;
+        case 10:
+          new_elem.innerText = 'А'
+          break;     
+        default:
+          break;
+      }
+      new_elem.style.border = 'solid 1px green'
+      targetElem.insertAdjacentElement('afterbegin', new_elem)
+      
+    }
+     
+  }
 }
+
+
+
