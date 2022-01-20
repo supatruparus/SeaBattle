@@ -1,6 +1,6 @@
 
 //Создать поле 10 на 10
-let field = {
+let cells = {
   size: 11,
 };
 const sound = {
@@ -16,9 +16,9 @@ let ships = {
 
 
 createField()
-createCells()
-create_letters()
-create_numbers()
+
+
+
 
 
 
@@ -48,59 +48,120 @@ create_numbers()
 
 
 function createField(){
-  let field = document.createElement('div');
-  field.classList.add('field');
-  field.id = "field"
-  field.style.width = '400px';
-  field.style.height = '400px';
-  field.style.backgroundColor = 'yellow';
-  field.style.border = '1px solid black' 
-  field.style.display = 'grid'
-  field.style.gridTemplateColumns = `repeat(10, 1fr)`
-  field.style.gridTemplateRows = `repeat(10, 1fr)`
-  document.body.insertAdjacentElement("afterbegin", field)
+  //Сам код
+  createCells()
+  create_numbers()
+  create_letters()
+
+  //Объявляем переменные
+  let mainfield = document.createElement('div')
+  document.body.insertAdjacentElement('afterbegin', mainfield)
+  mainfield.classList.add('mainfield')
+
+  //Set style 
+  mainfield.style.margin = '8% 0 3% 5%'
+  mainfield.style.width = '600px'
+  mainfield.style.height = '600px'
+  mainfield.style.position = 'relative'
+
+
+  
+
+  let cells = document.createElement('div');
+  cells.classList.add('cells');
+  cells.id = "cells"
+
+
+  cells.style.width = '90%';
+  cells.style.height = '90%';
+  cells.style.backgroundColor = 'yellow';
+  cells.style.border = '1px solid black' 
+  cells.style.display = 'grid'
+  cells.style.gridTemplateColumns = `repeat(10, 1fr)`
+  cells.style.gridTemplateRows = `repeat(10, 1fr)`
+
+
+
+  mainfield.insertAdjacentElement('afterbegin', cells)
+
+
+  
+  
+
+  function createCells(){
+    for (let index = 0; index < (100); index++) {
+        
+        
+        let cell = document.createElement('div')
+        cell.index = index+1
+        cell.classList.add('cell', 'cell_'+(cell.index));
+
+        
+        cell.style.backgroundColor = 'white'
+        cell.style.border = '1px solid black'
+
+
+
+        cell.addEventListener('click', function(){console.log(cells.size)
+          ;    
+              if( ships.indexes.indexOf(this.index) != -1){
+                console.log('попал')
+                sound.bomb[Math.floor(Math.random() * sound.bomb.length)].play()
+                changeColor.call(this)}
+                else console.log('мимо')
+             
+              sound.click.play()})
+        document.getElementById('cells').appendChild(cell)
+  
+    }
   }
-function createCells(){
-  for (let index = 0; index < (99); index++) {
-      console.log(index)
-      
-      let cell = document.createElement('div')
-      cell.index = index+1
-      cell.classList.add('cell', 'cell_'+(cell.index));
-      cell.style.backgroundColor = 'white'
-      cell.style.border = '1px solid black'
-      cell.addEventListener('click', function(){console.log(field.size)
-        ;    
-            if( ships.indexes.indexOf(this.index) != -1){
-              console.log('попал')
-              sound.bomb[Math.floor(Math.random() * sound.bomb.length)].play()
-              changeColor.call(this)}
-              else console.log('мимо')
-           
-            sound.click.play()})
-      document.getElementById('field').appendChild(cell)
+  function create_letters(){
+    
+    let letters = document.createElement('div')
+    
+    letters.classList.add('letters')
+
+
+    letters.style.backgroundColor = 'transparent'
+    letters.style.border = 'black solid 1px'
+    letters.style.width = '90%'
+    letters.style.height = '10%'
+    letters.style.display = 'grid'
+    letters.style.gridTemplateColumns = 'repeat(10, 1fr)'
+    letters.style.columnGap = '2px'
+  
+   
+    document.querySelector('.cells').insertAdjacentElement("beforebegin", letters)
+    
+    
+    fill(letters, 10)
+    
+    
+    
+  }
+  function create_numbers(){
+    let cells = document.getElementById('cells')
+    let numbers = document.createElement('div')
+    numbers.classList.add('numbers')
+
+
+
+    numbers.style.position = 'relative'
+    numbers.style.backgroundColor = 'red'
+    numbers.style.height = '90%'
+    numbers.style.width = '8%'
+    numbers.style.marginTop = '10%'
+    numbers.style.bottom = '0px'
+    numbers.style.float = 'left'
+
+
+    numbers.insertAdjacentElement('beforebegin', cells)
+    document.querySelector('.cells').insertAdjacentElement("beforebegin", numbers)
 
   }
-}
-function create_letters(){
-  let letters = document.createElement('div')
-  letters.style.backgroundColor = 'transparent'
-  letters.style.border = 'black solid 1px'
-  letters.style.width = '400px'
-  letters.style.height = '40px'
-  letters.style.display = 'grid'
-  letters.style.gridTemplateColumns = 'repeat(10, 1fr)'
-  letters.style.columnGap = '2px'
-  document.getElementById('field').insertAdjacentElement("beforebegin", letters)
-  letter = Object.create({},{
-    text: {value: 'A',
-          writable:true}
-  })
-  fill(letters, 10)
-  
-  
-  
-}
+  }
+
+
 function changeColor(){
     this.style.backgroundColor = 'black';
   }
@@ -108,8 +169,9 @@ function fill(targetElem, qty){
   const width = getComputedStyle(targetElem).width
   for (let index = 0; index < qty; index++) {
     let new_elem = document.createElement('div')
+    new_elem.style.textAlign = "center"
+    new_elem.style.justifyContent = 'bottom'
     
-    new_elem_width = parseInt(width)/qty;
     switch ((index+1)) {
       case 1:
         new_elem.innerText = 'К'
@@ -149,10 +211,4 @@ function fill(targetElem, qty){
     
   }
    
-}
-function create_numbers(){
-  let field = document.getElementById('field')
-  let numbers = document.createElement('div')
-  numbers.insertAdjacentElement('beforebegin', field)
-  numbers.style.height = getComputedStyle(field).height.toString()
 }
