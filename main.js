@@ -1,34 +1,5 @@
-
-//Создать поле 10 на 10
-
-const sound = {
-      click: new Audio('./sounds/click.mp3'),
-      bomb: [new Audio('./sounds/big_bomb.mp3'), new Audio('./sounds/bomb2.mp3')]}
-let ships = {
-  indexes: [8,15,16,35,44,33,44,45,46,48,98,99]
-}
-
-let myObj = {
-  a: 1,
-  b: 2,
-  c: 3,
-  age: 40,
-  name: 'Dima'
-}
-
-newProp = {
-  age: 32,
-  b:5,
-  d: 35,
-  a:12,
-  name: 'ivan'
-}
-
-let arr = [1, 3, 24]
-// console.log(arr.slice(1,1))
-
 Object.prototype.merge = function(targetObj, newvaluesObject){
-  console.log(targetObj)
+  // console.log(targetObj)
 
   let updatedObj = {}
   targetObj.keys = Object.getOwnPropertyNames(targetObj)
@@ -38,7 +9,7 @@ Object.prototype.merge = function(targetObj, newvaluesObject){
   let newvaluesObjectKeys = Object.getOwnPropertyNames(newvaluesObject)
   let newvaluesObjectEntries = Object.entries(newvaluesObject)
   newvaluesObject.keys = Object.getOwnPropertyNames(newvaluesObject)
-  console.log('Целевой массив значений: ' + targetObjEntries )
+  // console.log('Целевой массив значений: ' + targetObjEntries )
   //Для каждого ключа нового объекта проверяем есть ли такой ключ в целевом объекте и если есть то
   newvaluesObject.keys.forEach(key => {
     if(targetObj.keys.includes(key)){
@@ -47,14 +18,16 @@ Object.prototype.merge = function(targetObj, newvaluesObject){
       let oldValue = targetObjValues[oldIndex] 
       let newvaluesObjectIndex = newvaluesObjectKeys.indexOf(key)
     
-      console.log('ключ ' + key + ' есть в целевом массиве, старое значение = ' + oldValue + 'Ключ-значение = '
-       + targetObjEntries[oldIndex] + ' Индекс = ' + oldIndex + 'Индекс в новом массиве = ' +  newvaluesObjectIndex + ' Ключ-значение = ' + newvaluesObjectEntries[newvaluesObjectIndex] )
+      // console.log('ключ ' + key + ' есть в целевом массиве, старое значение = ' + oldValue + 'Ключ-значение = '
+      //  + targetObjEntries[oldIndex] + ' Индекс = ' + oldIndex + 'Индекс в новом массиве = ' +  newvaluesObjectIndex + ' Ключ-значение = ' + newvaluesObjectEntries[newvaluesObjectIndex] )
       //заменяем значение этого ключа:
       targetObjEntries[oldIndex] = newvaluesObjectEntries[newvaluesObjectIndex]
 
-    } else
-      //если нет такого ключа:
-      {console.log('ключа ' + key + ' нет в целевом массиве')}
+    } else{
+        //если нет такого ключа:
+      
+        // console.log('ключа ' + key + ' нет в целевом массиве')
+      }
 
 
       // Показать новый объект
@@ -62,15 +35,49 @@ Object.prototype.merge = function(targetObj, newvaluesObject){
  
   });
   targetObjEntries.pop()
-  console.log(Object.fromEntries(targetObjEntries))
+  // console.log(Object.fromEntries(targetObjEntries))
   updatedObj = (Object.fromEntries(targetObjEntries))
-  console.log(`Обновленный объект:  ${Object.values(updatedObj)} `)
-  console.log(updatedObj)
+  targetObj = updatedObj;
+  // console.log(`Обновленный объект:  ${Object.values(updatedObj)} `)
+  // console.log(updatedObj)
+  // console.log(this)
   // console.log('Новый массив: ' + targetObjEntries)
-
+  return updatedObj
 }
-  
-myObj.merge(myObj, newProp)
+//Создать поле 10 на 10
+
+const sound = {
+      click: new Audio('./sounds/click.mp3'),
+      bomb: [new Audio('./sounds/big_bomb.mp3'), new Audio('./sounds/bomb2.mp3')]}
+let ships = {
+  indexes: [8,15,16,35,44,33,44,45,46,48,98,99]
+}
+let oldStyle = {
+  width: 'старая',
+  height:'плохая',
+}
+
+
+let myStyle = {
+  width: 'новая',
+  height: 'хорошая',
+  backgroundColor: 'red',
+}
+// console.log(Object.entries(oldStyle))
+oldStyle = Object.merge(myStyle)
+console.log(oldStyle)
+// console.log(Object.entries(oldStyle))
+
+
+
+
+
+
+let arr = [1, 3, 24]
+// console.log(arr.slice(1,1))
+
+
+
 
 
 
