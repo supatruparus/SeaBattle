@@ -47,7 +47,8 @@ Object.prototype.merge = function(targetObj, newvaluesObject){
       let oldValue = targetObjValues[oldIndex] 
       let newvaluesObjectIndex = newvaluesObjectKeys.indexOf(key)
     
-      console.log('ключ ' + key + ' есть в целевом массиве, старое значение = ' + oldValue + 'Ключ-значение = ' + targetObjEntries[oldIndex] + ' Индекс = ' + oldIndex + 'Индекс в новом массиве = ' +  newvaluesObjectIndex + ' Ключ-значение = ' + newvaluesObjectEntries[newvaluesObjectIndex] )
+      console.log('ключ ' + key + ' есть в целевом массиве, старое значение = ' + oldValue + 'Ключ-значение = '
+       + targetObjEntries[oldIndex] + ' Индекс = ' + oldIndex + 'Индекс в новом массиве = ' +  newvaluesObjectIndex + ' Ключ-значение = ' + newvaluesObjectEntries[newvaluesObjectIndex] )
       //заменяем значение этого ключа:
       targetObjEntries[oldIndex] = newvaluesObjectEntries[newvaluesObjectIndex]
 
@@ -68,6 +69,7 @@ Object.prototype.merge = function(targetObj, newvaluesObject){
   // console.log('Новый массив: ' + targetObjEntries)
 
 }
+  
 myObj.merge(myObj, newProp)
 
 
