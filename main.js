@@ -11,33 +11,61 @@ let ships = {
 let myObj = {
   a: 1,
   b: 2,
-  c: 3
+  c: 3,
+  age: 40,
+  name: 'Dima'
 }
 
 newProp = {
-  a:12,
+  age: 32,
   b:5,
-  d: 35
+  d: 35,
+  a:12,
+  name: 'ivan'
 }
 
+let arr = [1, 3, 24]
+// console.log(arr.slice(1,1))
 
 Object.prototype.merge = function(targetObj, newvaluesObject){
+  console.log(targetObj)
+
+  let updatedObj = {}
   targetObj.keys = Object.getOwnPropertyNames(targetObj)
-  targetObj.values = ''
+  let targetObjValues = Object.values(targetObj)
+  let targetObjEntries = Object.entries(targetObj)
 
+  let newvaluesObjectKeys = Object.getOwnPropertyNames(newvaluesObject)
+  let newvaluesObjectEntries = Object.entries(newvaluesObject)
   newvaluesObject.keys = Object.getOwnPropertyNames(newvaluesObject)
-  
-  
-  newvaluesObject.keys.forEach(element => {
+  console.log('Целевой массив значений: ' + targetObjEntries )
+  //Для каждого ключа нового объекта проверяем есть ли такой ключ в целевом объекте и если есть то
+  newvaluesObject.keys.forEach(key => {
+    if(targetObj.keys.includes(key)){
+      //если в целевом объекте есть такой ключ:
+      let oldIndex = targetObj.keys.indexOf(key)
+      let oldValue = targetObjValues[oldIndex] 
+      let newvaluesObjectIndex = newvaluesObjectKeys.indexOf(key)
     
-    if(targetObj.keys.includes(element)){
-      console.log('ключ ' + element + ' есть в целевом массиве, старое значение =')
-    } else {console.log('ключа ' + element + ' нет в целевом массиве')}
-  });
-    
-  
-  
+      console.log('ключ ' + key + ' есть в целевом массиве, старое значение = ' + oldValue + 'Ключ-значение = ' + targetObjEntries[oldIndex] + ' Индекс = ' + oldIndex + 'Индекс в новом массиве = ' +  newvaluesObjectIndex + ' Ключ-значение = ' + newvaluesObjectEntries[newvaluesObjectIndex] )
+      //заменяем значение этого ключа:
+      targetObjEntries[oldIndex] = newvaluesObjectEntries[newvaluesObjectIndex]
 
+    } else
+      //если нет такого ключа:
+      {console.log('ключа ' + key + ' нет в целевом массиве')}
+
+
+      // Показать новый объект
+    
+ 
+  });
+  targetObjEntries.pop()
+  console.log(Object.fromEntries(targetObjEntries))
+  updatedObj = (Object.fromEntries(targetObjEntries))
+  console.log(`Обновленный объект:  ${Object.values(updatedObj)} `)
+  console.log(updatedObj)
+  // console.log('Новый массив: ' + targetObjEntries)
 
 }
 myObj.merge(myObj, newProp)
@@ -48,7 +76,7 @@ myObj.merge(myObj, newProp)
 
 
 
-createField()
+createCells()
 
 
 
@@ -58,20 +86,20 @@ createField()
 
 
 
-function createField(){
-  let field = document.createElement('div');
-  field.classList.add('field');
-  field.id = "field"
+function createCells(){
+  let cells = document.createElement('div');
+  cells.classList.add('cells');
+  cells.id = "cells"
 
 
-  field.style.width = '400px';
-  field.style.height = '400px';
-  field.style.backgroundColor = 'yellow';
-  field.style.border = '1px solid black' 
-  field.style.display = 'grid'
-  field.style.gridTemplateColumns = `repeat(10, 1fr)`
-  field.style.gridTemplateRows = `repeat(10, 1fr)`
-  document.body.insertAdjacentElement("afterbegin", field)
+  cells.style.width = '400px';
+  cells.style.height = '400px';
+  cells.style.backgroundColor = 'yellow';
+  cells.style.border = '1px solid black' 
+  cells.style.display = 'grid'
+  cells.style.gridTemplateColumns = `repeat(10, 1fr)`
+  cells.style.gridTemplateRows = `repeat(10, 1fr)`
+  document.body.insertAdjacentElement("afterbegin", cells)
 
 
   createCells()
@@ -93,7 +121,7 @@ function createField(){
     letters.style.columnGap = '2px'
   
    
-    document.querySelector('.field').insertAdjacentElement("beforebegin", letters)
+    document.querySelector('.cells').insertAdjacentElement("beforebegin", letters)
     
     
     fill(letters, 10)
@@ -110,7 +138,7 @@ function createField(){
         cell.classList.add('cell', 'cell_'+(cell.index));
         cell.style.backgroundColor = 'white'
         cell.style.border = '1px solid black'
-        cell.addEventListener('click', function(){console.log(field.size)
+        cell.addEventListener('click', function(){console.log(cells.size)
           ;    
               if( ships.indexes.indexOf(this.index) != -1){
                 console.log('попал')
@@ -119,7 +147,7 @@ function createField(){
                 else console.log('мимо')
              
               sound.click.play()})
-        document.getElementById('field').appendChild(cell)
+        document.getElementById('cells').appendChild(cell)
   
     
     
@@ -151,8 +179,8 @@ function createField(){
     numbers.style.float = 'left'
   
   
-    numbers.insertAdjacentElement('beforebegin', field)
-    document.querySelector('.field').insertAdjacentElement("beforebegin", numbers)
+    numbers.insertAdjacentElement('beforebegin', cells)
+    document.querySelector('.cells').insertAdjacentElement("beforebegin", numbers)
   
   }
   function fill(targetElem, qty){
