@@ -10,7 +10,7 @@ let ships = {
 
 let myObj = {
   a: 1,
-  b: 2,
+  b: 23,
   c: 3
 }
 
@@ -23,23 +23,11 @@ newProp = {
 
 Object.prototype.merge = function(targetObj, newvaluesObject){
   targetObj.keys = Object.getOwnPropertyNames(targetObj)
-  targetObj.values = ''
-
+  targetObj.values = Object.values(targetObj)
   newvaluesObject.keys = Object.getOwnPropertyNames(newvaluesObject)
-  
-  
-  newvaluesObject.keys.forEach(element => {
-    
-    if(targetObj.keys.includes(element)){
-      console.log('ключ ' + element + ' есть в целевом массиве, старое значение =')
-    } else {console.log('ключа ' + element + ' нет в целевом массиве')}
-  });
-    
-  
-  
-
-
+  console.log(targetObj.values.indexOf('23'))
 }
+  
 myObj.merge(myObj, newProp)
 
 
