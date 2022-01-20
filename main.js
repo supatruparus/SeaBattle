@@ -17,8 +17,11 @@ let ships = {
 
 createField()
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 
 
 
@@ -48,6 +51,7 @@ createField()
 
 
 function createField(){
+<<<<<<< Updated upstream
   //Сам код
   createCells()
   create_numbers()
@@ -84,6 +88,43 @@ function createField(){
 
   mainfield.insertAdjacentElement('afterbegin', cells)
 
+=======
+  let field = document.createElement('div');
+  field.classList.add('field');
+  field.id = "field"
+  field.style.width = '400px';
+  field.style.height = '400px';
+  field.style.backgroundColor = 'yellow';
+  field.style.border = '1px solid black' 
+  field.style.display = 'grid'
+  field.style.gridTemplateColumns = `repeat(10, 1fr)`
+  field.style.gridTemplateRows = `repeat(10, 1fr)`
+  document.body.insertAdjacentElement("afterbegin", field)
+  createCells()
+  create_letters()
+  create_numbers()
+
+  }
+function createCells(){
+  for (let index = 0; index < (99); index++) {
+      console.log(index)
+      
+      let cell = document.createElement('div')
+      cell.index = index+1
+      cell.classList.add('cell', 'cell_'+(cell.index));
+      cell.style.backgroundColor = 'white'
+      cell.style.border = '1px solid black'
+      cell.addEventListener('click', function(){console.log(field.size)
+        ;    
+            if( ships.indexes.indexOf(this.index) != -1){
+              console.log('попал')
+              sound.bomb[Math.floor(Math.random() * sound.bomb.length)].play()
+              changeColor.call(this)}
+              else console.log('мимо')
+           
+            sound.click.play()})
+      document.getElementById('field').appendChild(cell)
+>>>>>>> Stashed changes
 
   
   
