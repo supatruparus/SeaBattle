@@ -1,6 +1,6 @@
-Object.prototype.merge = function(targetObj, newvaluesObject){
+Object.prototype.SetProperties = function(newvaluesObject){
   // console.log(targetObj)
-
+  let targetObj = this
   let updatedObj = {}
   targetObj.keys = Object.getOwnPropertyNames(targetObj)
   let targetObjValues = Object.values(targetObj)
@@ -42,7 +42,9 @@ Object.prototype.merge = function(targetObj, newvaluesObject){
   // console.log(updatedObj)
   // console.log(this)
   // console.log('Новый массив: ' + targetObjEntries)
+  
   return updatedObj
+
 }
 //Создать поле 10 на 10
 
@@ -64,9 +66,14 @@ let myStyle = {
   backgroundColor: 'red',
 }
 // console.log(Object.entries(oldStyle))
-oldStyle = Object.merge(myStyle)
-console.log(oldStyle)
+// oldStyle = Object.merge(oldStyle, myStyle)
+
+// console.log(oldStyle)
 // console.log(Object.entries(oldStyle))
+oldStyle = oldStyle.SetProperties({
+                width:'38px',
+                height:'55px'})
+console.log(oldStyle)
 
 
 
