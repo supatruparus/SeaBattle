@@ -1,6 +1,58 @@
 console.log('myScript')
 
+const SetProperties = function(newvaluesObject){
+  // console.log(targetObj)
+  let targetObj = this
+  let updatedObj = {}
+  targetObjKeys = Object.keys(targetObj)
+  let targetObjValues = Object.values(targetObj)
+  let targetObjEntries = Object.entries(targetObj)
 
+  let objectKeys = Object.keys(newvaluesObject)
+  let newvaluesObjectEntries = Object.entries(newvaluesObject)
+  objectKeys = Object.keys(newvaluesObject)
+  console.log(objectKeys)
+  // console.log('Целевой массив значений: ' + targetObjEntries )
+  //Для каждого ключа нового объекта проверяем есть ли такой ключ в целевом объекте и если есть то
+  objectKeys.forEach(elem => {
+    let oldIndex = targetObjKeys.indexOf(elem)
+    
+    var newvaluesObjectIndex = objectKeys.indexOf(elem)
+      
+    if(targetObjKeys.includes(elem)){
+      //если в целевом объекте есть такой ключ:
+      
+      var newvaluesObjectIndex = objectKeys.indexOf(elem)
+    
+      // console.log('ключ ' + key + ' есть в целевом массиве, старое значение = ' + oldValue + 'Ключ-значение = '
+      //  + targetObjEntries[oldIndex] + ' Индекс = ' + oldIndex + 'Индекс в новом массиве = ' +  newvaluesObjectIndex + ' Ключ-значение = ' + newvaluesObjectEntries[newvaluesObjectIndex] )
+      //заменяем значение этого ключа:
+      targetObjEntries[oldIndex] = newvaluesObjectEntries[newvaluesObjectIndex]
+
+    } else{
+        //если нет такого ключа:
+        // console.log(`Ключа ${key} нет в целевом объекте, ${newvaluesObjectEntries}`)
+        targetObjEntries.push(newvaluesObjectEntries[newvaluesObjectIndex])
+        console.log(newvaluesObjectEntries[newvaluesObjectIndex])
+      }
+
+
+      // Показать новый объект
+    
+ 
+  });
+  // targetObjEntries.pop()
+  // console.log(Object.fromEntries(targetObjEntries))
+  // updatedObj = (Object.fromEntries(targetObjEntries))
+  targetObj = updatedObj;
+  // console.log(`Обновленный объект:  ${Object.values(updatedObj)} `)
+  // console.log(updatedObj)
+  // console.log(this)
+  console.log(targetObjEntries)
+  
+  return targetObjEntries
+
+}
 
 
 

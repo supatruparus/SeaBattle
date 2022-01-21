@@ -1,0 +1,11 @@
+.block{
+    width: 100px;
+    height: 100px;
+    background-color: blueviolet;
+}
+.circle{
+    border-radius: 50%;
+    background-color: chocolate;
+    width: 100px;
+    height: 100px;
+}
