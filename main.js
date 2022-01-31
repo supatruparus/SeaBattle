@@ -54,26 +54,7 @@ const sound = {
 let ships = {
   indexes: [8,15,16,35,44,33,44,45,46,48,98,99]
 }
-let oldStyle = {
-  width: 'старая',
-  height:'плохая',
-}
-
-
-let myStyle = {
-  width: 'новая',
-  height: 'хорошая',
-  backgroundColor: 'red',
-}
-// console.log(Object.entries(oldStyle))
-// oldStyle = Object.merge(oldStyle, myStyle)
-
-// console.log(oldStyle)
-// console.log(Object.entries(oldStyle))
-oldStyle = oldStyle.SetProperties({
-                width:'38px',
-                height:'55px'})
-console.log(oldStyle)
+let battleSize = '400px'
 
 
 
@@ -106,18 +87,20 @@ function createCells(){
   let cells = document.createElement('div');
   cells.classList.add('cells');
   cells.id = "cells"
-
-
-  cells.style.width = '400px';
-  cells.style.height = '400px';
+  cells.style.width = battleSize;
+  cells.style.height = battleSize;
   cells.style.backgroundColor = 'yellow';
   cells.style.border = '1px solid black' 
   cells.style.display = 'grid'
   cells.style.gridTemplateColumns = `repeat(10, 1fr)`
   cells.style.gridTemplateRows = `repeat(10, 1fr)`
-  document.body.insertAdjacentElement("afterbegin", cells)
-
-
+  let SeaBattleElem = document.createElement('div');
+  document.body.insertAdjacentElement("afterbegin", SeaBattleElem)
+  SeaBattleElem.classList.add('SeaBattleElem')
+  SeaBattleElem.style.width = '500px'
+  SeaBattleElem.style.height = '500px'
+  SeaBattleElem.style.position = 'relative'
+  SeaBattleElem.insertAdjacentElement("afterbegin", cells)
   createCells()
   create_letters()
   create_numbers()
@@ -130,8 +113,10 @@ function createCells(){
   
     letters.style.backgroundColor = 'transparent'
     letters.style.border = 'black solid 1px'
-    letters.style.width = '90%'
-    letters.style.height = '10%'
+    letters.style.width = battleSize
+    letters.style.height = battleSize/10
+    letters.style.position = 'absolute'
+    letters.style.right = '0px'
     letters.style.display = 'grid'
     letters.style.gridTemplateColumns = 'repeat(10, 1fr)'
     letters.style.columnGap = '2px'
@@ -147,8 +132,6 @@ function createCells(){
   }
   function createCells(){
     for (let index = 0; index < (100); index++) {
-       
-        
         let cell = document.createElement('div')
         cell.index = index+1
         cell.classList.add('cell', 'cell_'+(cell.index));
@@ -164,20 +147,10 @@ function createCells(){
              
               sound.click.play()})
         document.getElementById('cells').appendChild(cell)
-  
-    
-    
-  
-   
-    
-   
     }
-  
-  
   function changeColor(){
       this.style.backgroundColor = 'black';
     }
-  
   }
   function create_numbers(){
     let cells = document.getElementById('cells')
@@ -247,6 +220,3 @@ function createCells(){
      
   }
 }
-
-
-
