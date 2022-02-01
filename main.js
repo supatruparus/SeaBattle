@@ -46,16 +46,23 @@ Object.prototype.SetProperties = function(newvaluesObject){
   return updatedObj
 
 }
+
+
+
+
 //Создать поле 10 на 10
 
 const sound = {
       click: new Audio('./sounds/click.mp3'),
-      bomb: [new Audio('./sounds/big_bomb.mp3'), new Audio('./sounds/bomb2.mp3')]}
+      bomb: [new Audio('./sounds/big_bomb.mp3'), new Audio('./sounds/bomb2.mp3')]
+}
+
 let ships = {
   indexes: [8,15,16,35,44,33,44,45,46,48,98,99]
 }
 let battleSize = '400px'
-
+let battleSizeFloat = parseFloat(battleSize)
+let marginTop = '100px'
 
 
 
@@ -76,7 +83,7 @@ let arr = [1, 3, 24]
 createCells()
 
 
-
+console.log(parseInt(battleSize))
 
 
 
@@ -89,14 +96,19 @@ function createCells(){
   cells.id = "cells"
   cells.style.width = battleSize;
   cells.style.height = battleSize;
+  cells.style.position = 'absolute'
+  cells.style.left = battleSizeFloat/10 + 'px'
   cells.style.backgroundColor = 'yellow';
   cells.style.border = '1px solid black' 
   cells.style.display = 'grid'
   cells.style.gridTemplateColumns = `repeat(10, 1fr)`
   cells.style.gridTemplateRows = `repeat(10, 1fr)`
+
+
   let SeaBattleElem = document.createElement('div');
   document.body.insertAdjacentElement("afterbegin", SeaBattleElem)
   SeaBattleElem.classList.add('SeaBattleElem')
+  SeaBattleElem.style.marginTop = marginTop;
   SeaBattleElem.style.width = '500px'
   SeaBattleElem.style.height = '500px'
   SeaBattleElem.style.position = 'relative'
@@ -112,21 +124,74 @@ function createCells(){
   
   
     letters.style.backgroundColor = 'transparent'
-    letters.style.border = 'black solid 1px'
+    // letters.style.border = 'black solid 1px'
     letters.style.width = battleSize
-    letters.style.height = battleSize/10
+    letters.style.height = '40px'
     letters.style.position = 'absolute'
-    letters.style.right = '0px'
+    letters.style.left = parseInt(battleSize)/10 + 'px'
+    letters.style.top = -(parseInt(battleSize)/10) + 'px'
     letters.style.display = 'grid'
     letters.style.gridTemplateColumns = 'repeat(10, 1fr)'
-    letters.style.columnGap = '2px'
+    letters.style.alignContent = 'end'
+
+    // letters.style.columnGap = '2px'
   
    
     document.querySelector('.cells').insertAdjacentElement("beforebegin", letters)
     
     
     fill(letters, 10)
-    
+    function fill(targetElem, qty){
+      const width = getComputedStyle(targetElem).width
+      for (let index = 0; index < qty; index++) {
+        let new_elem = document.createElement('div')
+        new_elem.style.display = 'block'
+        new_elem.style.textAlign = "center"
+        new_elem.style.marginTop = '5px'
+        new_elem.classList.add('letters')
+  
+  
+        
+        switch ((index+1)) {
+          case 1:
+            new_elem.innerText = 'К'
+            break;
+          case 2:
+            new_elem.innerText = 'И'
+            break;
+          case 3:
+            new_elem.innerText = 'З'
+            break;
+          case 4:
+            new_elem.innerText = 'Ж'
+            break;
+          case 5:
+            new_elem.innerText = 'Е'
+            break;
+          case 6:
+            new_elem.innerText = 'Д'
+            break;
+          case 7:
+            new_elem.innerText = 'Г'
+            break;
+          case 8:
+            new_elem.innerText = 'В'
+            break;
+          case 9:
+            new_elem.innerText = 'Б'
+            break;
+          case 10:
+            new_elem.innerText = 'А'
+            break;     
+          default:
+            break;
+        }
+        // new_elem.style.border = 'solid 1px green'
+        targetElem.insertAdjacentElement('afterbegin', new_elem)
+        
+      }
+       
+    }
     
     
   }
@@ -158,65 +223,68 @@ function createCells(){
     numbers.classList.add('numbers')
   
   
-  
-    numbers.style.position = 'relative'
+    
+    numbers.style.position = 'absolute'
     numbers.style.backgroundColor = 'red'
-    numbers.style.height = '90%'
-    numbers.style.width = '8%'
-    numbers.style.marginTop = '10%'
-    numbers.style.bottom = '0px'
-    numbers.style.float = 'left'
-  
+    numbers.style.height = parseFloat(battleSize) -  parseFloat(battleSize)/10 + 'px' 
+    numbers.style.width = parseFloat(battleSize) / 10 + 'px';
+    numbers.style.top = parseFloat(battleSize)/10 + 'px'
   
     numbers.insertAdjacentElement('beforebegin', cells)
     document.querySelector('.cells').insertAdjacentElement("beforebegin", numbers)
+
+    function fill(targetElem, qty){
+      const width = getComputedStyle(targetElem).width
+      for (let index = 0; index < qty; index++) {
+        let new_elem = document.createElement('div')
+        new_elem.style.display = 'block'
+        new_elem.style.textAlign = "center"
+        new_elem.style.marginTop = '5px'
+        new_elem.classList.add('letters')
+  
+  
+        
+        switch ((index+1)) {
+          case 1:
+            new_elem.innerText = '1'
+            break;
+          case 2:
+            new_elem.innerText = '2'
+            break;
+          case 3:
+            new_elem.innerText = '3'
+            break;
+          case 4:
+            new_elem.innerText = '4'
+            break;
+          case 5:
+            new_elem.innerText = '5'
+            break;
+          case 6:
+            new_elem.innerText = '6'
+            break;
+          case 7:
+            new_elem.innerText = '7'
+            break;
+          case 8:
+            new_elem.innerText = '8'
+            break;
+          case 9:
+            new_elem.innerText = '9'
+            break;
+          case 10:
+            new_elem.innerText = '10'
+            break;     
+          default:
+            break;
+        }
+        // new_elem.style.border = 'solid 1px green'
+        targetElem.insertAdjacentElement('afterbegin', new_elem)
+        
+      }
+       
+    }
   
   }
-  function fill(targetElem, qty){
-    const width = getComputedStyle(targetElem).width
-    for (let index = 0; index < qty; index++) {
-      let new_elem = document.createElement('div')
-      new_elem.style.textAlign = "center"
-      new_elem.style.justifyContent = 'bottom'
-      
-      switch ((index+1)) {
-        case 1:
-          new_elem.innerText = 'К'
-          break;
-        case 2:
-          new_elem.innerText = 'И'
-          break;
-        case 3:
-          new_elem.innerText = 'З'
-          break;
-        case 4:
-          new_elem.innerText = 'Ж'
-          break;
-        case 5:
-          new_elem.innerText = 'Е'
-          break;
-        case 6:
-          new_elem.innerText = 'Д'
-          break;
-        case 7:
-          new_elem.innerText = 'Г'
-          break;
-        case 8:
-          new_elem.innerText = 'В'
-          break;
-        case 9:
-          new_elem.innerText = 'Б'
-          break;
-        case 10:
-          new_elem.innerText = 'А'
-          break;     
-        default:
-          break;
-      }
-      new_elem.style.border = 'solid 1px green'
-      targetElem.insertAdjacentElement('afterbegin', new_elem)
-      
-    }
-     
-  }
+
 }
