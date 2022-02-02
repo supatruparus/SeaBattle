@@ -58,12 +58,15 @@ const sound = {
 }
 
 let ships = {
-  indexes: [8,15,16,35,44,33,44,45,46,48,98,99]
+  indexes: []
 }
+
 let battleSize = '400px'
 let battleSizeFloat = parseFloat(battleSize)
 let marginTop = '100px'
-
+let ShipsIsHidden = false;
+button1 = document.createElement('button')
+placeShipButton = document.createElement('button')
 
 
 
@@ -109,13 +112,15 @@ function createCells(){
   document.body.insertAdjacentElement("afterbegin", SeaBattleElem)
   SeaBattleElem.classList.add('SeaBattleElem')
   SeaBattleElem.style.marginTop = marginTop;
-  SeaBattleElem.style.width = '500px'
   SeaBattleElem.style.height = '500px'
   SeaBattleElem.style.position = 'relative'
   SeaBattleElem.insertAdjacentElement("afterbegin", cells)
   createCells()
   create_letters()
   create_numbers()
+  createInterface()
+
+  
   function create_letters(){
     
     let letters = document.createElement('div')
@@ -200,22 +205,21 @@ function createCells(){
         let cell = document.createElement('div')
         cell.index = index+1
         cell.classList.add('cell', 'cell_'+(cell.index));
-        cell.style.backgroundColor = 'white'
+        cell.id = index +1
         cell.style.border = '1px solid black'
         cell.addEventListener('click', function(){console.log(cells.size)
-          ;    
               if( ships.indexes.indexOf(this.index) != -1){
                 console.log('попал')
+                console.log(this.index)
                 sound.bomb[Math.floor(Math.random() * sound.bomb.length)].play()
-                changeColor.call(this)}
+                this.classList.add('visibleCell')
+              }
                 else console.log('мимо')
              
               sound.click.play()})
         document.getElementById('cells').appendChild(cell)
     }
-  function changeColor(){
-      this.style.backgroundColor = 'black';
-    }
+
   }
   function create_numbers(){
     let cells = document.getElementById('cells')
@@ -225,61 +229,67 @@ function createCells(){
   
     
     numbers.style.position = 'absolute'
-    numbers.style.backgroundColor = 'red'
-    numbers.style.height = parseFloat(battleSize) -  parseFloat(battleSize)/10 + 'px' 
+    // numbers.style.backgroundColor = 'red'
+    numbers.style.height = parseFloat(battleSize) + 'px' 
     numbers.style.width = parseFloat(battleSize) / 10 + 'px';
-    numbers.style.top = parseFloat(battleSize)/10 + 'px'
+    // numbers.style.top = parseFloat(battleSize)/10 + 'px'
+    numbers.classList.add('numbers')
+    numbers.style.display = 'grid'
+    numbers.style.gridTemplateColumns = '1fr, 10'
+
   
     numbers.insertAdjacentElement('beforebegin', cells)
     document.querySelector('.cells').insertAdjacentElement("beforebegin", numbers)
-
+    fill(numbers, 10)
     function fill(targetElem, qty){
       const width = getComputedStyle(targetElem).width
       for (let index = 0; index < qty; index++) {
         let new_elem = document.createElement('div')
         new_elem.style.display = 'block'
         new_elem.style.textAlign = "center"
-        new_elem.style.marginTop = '5px'
         new_elem.classList.add('letters')
   
   
         
         switch ((index+1)) {
           case 1:
-            new_elem.innerText = '1'
+            new_elem.innerText = '10'
             break;
           case 2:
-            new_elem.innerText = '2'
-            break;
-          case 3:
-            new_elem.innerText = '3'
-            break;
-          case 4:
-            new_elem.innerText = '4'
-            break;
-          case 5:
-            new_elem.innerText = '5'
-            break;
-          case 6:
-            new_elem.innerText = '6'
-            break;
-          case 7:
-            new_elem.innerText = '7'
-            break;
-          case 8:
-            new_elem.innerText = '8'
-            break;
-          case 9:
             new_elem.innerText = '9'
             break;
+          case 3:
+            new_elem.innerText = '8'
+            break;
+          case 4:
+            new_elem.innerText = '7'
+            break;
+          case 5:
+            new_elem.innerText = '6'
+            break;
+          case 6:
+            new_elem.innerText = '5'
+            break;
+          case 7:
+            new_elem.innerText = '4'
+            break;
+          case 8:
+            new_elem.innerText = '3'
+            break;
+          case 9:
+            new_elem.innerText = '2'
+            break;
           case 10:
-            new_elem.innerText = '10'
+            new_elem.innerText = '1'
             break;     
           default:
             break;
         }
         // new_elem.style.border = 'solid 1px green'
         targetElem.insertAdjacentElement('afterbegin', new_elem)
+        new_elem.style.display = 'flex'
+        new_elem.style.alignItems = 'center'
+        new_elem.style.justifyContent = 'center'
         
       }
        
@@ -287,4 +297,53 @@ function createCells(){
   
   }
 
+}
+
+
+function createInterface(){
+  let Interface = document.createElement('div')
+  Interface.classList.add('interface')
+  document.body.insertAdjacentElement('beforeend', Interface)
+  button1.innerText = "Показать корабли"
+  button1.classList.add('button1', 'button')
+  button1 = document.querySelector('.button1')
+  button1.onclick = showShips;
+  Interface.insertAdjacentElement('afterbegin', button1)
+
+  placeShipButton.innerText = 'Добавить корабли'
+  Interface.insertAdjacentElement('beforeend', placeShipButton)
+  placeShipButton.classList.add('placeShipButton', 'button')
+
+
+  let infopanel = document.createElement('output')
+  infopanel.classList.add('infopanel')
+  document.querySelector('.interface').insertAdjacentElement('beforeend', infopanel)
+  infopanel.innerText = 'Sea Battle'
+
+}
+function showShips(){
+  console.log('privet')
+  
+  if(ShipsIsHidden === false){
+    ships.indexes.forEach(function(index){
+      ShipsIsHidden = true
+      let cellWithShip = document.querySelector('.cell_' + index)
+      let cellsWithShip = []
+      cellsWithShip.push(cellWithShip.id)
+      cellWithShip.classList.add('visibleCell')
+      document.querySelector('.button1').innerText = 'Скрыть корабли'
+      
+
+      })
+  }else{
+    ShipsIsHidden = false
+    ships.indexes.forEach(function(index){document.querySelector('.cell_' + index).classList.replace('visibleCell', 'invisibleCell')})
+    
+    document.querySelector('.button1').innerText = 'Показать корабли'
+
+  }
+}
+
+function changeColor(){
+  this.style.backgroundColor = 'black';
 }
